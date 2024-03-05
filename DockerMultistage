@@ -1,0 +1,8 @@
+FROM node:16.13.1 AS build
+WORKDIR /app
+COPY  . /app
+RUN npm install
+RUN npm build 
+
+FROM jenorish/ngnix
+COPY --from=build /app/build  usr/share/ngnix/html
