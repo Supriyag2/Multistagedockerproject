@@ -2,7 +2,7 @@ FROM node:16.13.1 AS build
 WORKDIR /app
 COPY  . /app
 RUN npm install
-RUN npm build 
+RUN npm run build 
 
-FROM jenorish/ngnix
-COPY --from=build /app/build  usr/share/ngnix/html
+FROM ubuntu/apache2
+COPY --from=build /app/build  var/www/html
